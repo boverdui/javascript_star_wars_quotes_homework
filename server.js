@@ -23,10 +23,8 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
     const newQuote = req.body;
     quotesCollection.save(newQuote, function (err, result) {
       if (err) {
-        console.error(err);
         res.status(500);
         res.send();
-        return;
       }
       res.status(201);
       res.json();
@@ -36,10 +34,8 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
   server.get('/api/quotes', function (req, res) {
     quotesCollection.find().toArray(function (err, result) {
       if (err) {
-        console.error(err);
         res.status(500);
         res.send();
-        return;
       }
       res.json(result);
     });
