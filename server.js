@@ -68,8 +68,8 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
   server.put('/api/quotes/:id', function(req, res){
     const objectID = ObjectID(req.params.id);
     const filterObject = {_id: objectID};
-    const updatedData = req.body;
-    quotesCollection.update(filterObject, updatedData, function(err, result){
+    const updatedData = {$set: req.body};
+    quotesCollection.updateOne(filterObject, updatedData, function(err, result){
       if(err) {
         res.status(500);
         res.send();
